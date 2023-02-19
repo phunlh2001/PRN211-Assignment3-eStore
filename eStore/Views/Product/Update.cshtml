@@ -1,0 +1,16 @@
+@model BusinessObject.Objects.Product
+@{
+    ViewData["Title"] = "Update Product";
+}
+
+<h2>Update</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="ProductId" />
+    Category ID: <input class="form-control" asp-for="CategoryId" readonly /> <br />
+    Product Name: <input type="text" class="form-control" asp-for="ProductName" /> <br />
+    Weight: <input type="text" class="form-control" asp-for="Weight" /> <br />
+    Price: <input type="number" class="form-control" asp-for="UnitPrice" /> <br />
+    Stock: <input type="number" class="form-control" asp-for="UnitslnStock" /> <br />
+    <input type="submit" value="Update" class="btn btn-outline-success">
+</form>

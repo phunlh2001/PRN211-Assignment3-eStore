@@ -1,0 +1,52 @@
+@model IEnumerable<BusinessObject.Objects.Order>
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Order Index";
+
+    var user = @HttpContextAccessor.HttpContext.Session.GetString("user");
+    var indexID = 1;
+}
+
+<div class="text-center">
+    <h2>Hi, @user! All your orders</h2>
+    <hr />
+
+    <table class="table">
+    <thead class="table thead-light table-bordered">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Required Date</th>
+            <th scope="col">Shipped Date</th>
+            <th scope="col">Freight</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@indexID</td>
+                <td>@item.OrderDate</td>
+                <td>@item.RequiredDate</td>
+                <td>@item.ShippedDate</td>
+                <td>@item.Freight</td>
+                <td>
+                    @if (item.ShippedDate.Equals(DateTime.Now)) {
+                        <button class="btn btn-success">Done</button>
+                    } else {
+                        <button class="btn btn-primary">Waiting...</button>
+                        <a asp-action="CancelOrder" asp-route-Id="@item.OrderId" class="btn btn-danger">Cancel</a>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Order" asp-action="ViewDetail" asp-route-Id="@item.OrderId" class="btn btn-link">View Details</a>
+                </td>
+            </tr>
+            indexID++;
+        }
+    </tbody>
+</table>
+</div>

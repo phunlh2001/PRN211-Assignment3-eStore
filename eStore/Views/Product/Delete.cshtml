@@ -1,0 +1,15 @@
+@model BusinessObject.Objects.Product
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h2>Delete</h2>
+
+<form asp-action="Delete" method="post">
+    <input asp-for="ProductId" type="hidden" />
+    Product Name: <input class="form-control" asp-for="ProductName" readonly/> <br />
+    Weight: <input class="form-control" asp-for="Weight" readonly/> <br />
+    Price: <input class="form-control" asp-for="UnitPrice" readonly/> <br />
+    Stock: <input class="form-control" asp-for="UnitslnStock" readonly/> <br />
+    <input type="submit" value="Delete" class="btn btn-outline-danger">
+</form>

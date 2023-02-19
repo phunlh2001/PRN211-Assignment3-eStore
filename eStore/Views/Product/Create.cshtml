@@ -1,0 +1,29 @@
+@model BusinessObject.Objects.Product
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create" method="post">
+    Category ID: <input type="number" class="form-control" asp-for="CategoryId">
+    <span class="text-danger" asp-validation-for="CategoryId"></span> <br />
+
+    Product Name: <input type="text" class="form-control" asp-for="ProductName" />
+    <span class="text-danger" asp-validation-for="ProductName"></span> <br />
+
+    Weight: <input type="text" class="form-control" asp-for="Weight" />
+    <span class="text-danger" asp-validation-for="Weight"></span> <br />
+
+    Price: <input type="text" class="form-control" asp-for="UnitPrice" />
+    <span class="text-danger" asp-validation-for="UnitPrice"></span> <br />
+
+    Stock: <input type="number" class="form-control" asp-for="UnitslnStock" />
+    <span class="text-danger" asp-validation-for="UnitslnStock"></span> <br />
+    
+    <input type="submit" value="Create" class="btn btn-outline-success">
+</form>
+
+@section Scripts{
+    @{<partial name="_ValidationScriptsPartial" />}
+}

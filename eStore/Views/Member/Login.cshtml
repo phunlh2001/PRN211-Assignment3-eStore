@@ -1,0 +1,23 @@
+@model BusinessObject.Objects.Member
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="post" class="w-25">
+    <span class="text-danger">@ViewBag.error</span> <br />
+
+    Email: <input class="form-control" type="email" name="email" />
+    <span class="text-danger" asp-validation-for="Email"></span> <br />
+
+    Password: <input class="form-control" type="password" name="pwd" />
+    <span class="text-danger" asp-validation-for="Password"></span> <br />
+
+    <input type="submit" value="Submit" class="btn btn-success" />
+</form>
+<hr>
+<div class="text-secondary">
+    <span>Email: admin@VM.com</span><br/>
+    <span>Password: adminadmin</span>
+</div>

@@ -1,0 +1,16 @@
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Products";
+
+    var userID = @HttpContextAccessor.HttpContext.Session.GetString("userID");
+    var user = @HttpContextAccessor.HttpContext.Session.GetString("user");
+}
+
+<div class="text-center">
+    <h2>Welcome to Product page</h2>
+    @if (user == "admin@VM.com") {
+        <a asp-action="Create" class="btn btn-primary">Create</a>
+    }
+    <a asp-controller="Home" class="btn btn-outline-primary">Back</a>
+</div>

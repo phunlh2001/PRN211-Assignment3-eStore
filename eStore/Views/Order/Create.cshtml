@@ -1,0 +1,21 @@
+@model BusinessObject.Objects.Order
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Create Order";
+
+    var memberID = @HttpContextAccessor.HttpContext.Session.GetString("userID");
+    var userEmail = @HttpContextAccessor.HttpContext.Session.GetString("user");
+}
+
+<h2>New Order</h2>
+<hr />
+
+<form asp-action="Create" method="post" class="w-25">
+    <input asp-for="@memberID" type="hidden" />
+    Your email: <input class="form-control" value="@userEmail" readonly /> <br />
+    Product Name: <input class="form-control" value="@TempData["ProductName"]" readonly /> <br />
+    Product Price: <input class="form-control" value="@TempData["Price"]" readonly /> <br />
+    <input type="submit" value="Confirm" class="btn btn-success" />
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+</form>

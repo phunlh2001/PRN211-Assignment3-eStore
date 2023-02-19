@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BusinessObject.Objects.Product>
+@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+    ViewData["Title"] = "Home Page";
+
+    var user = @HttpContextAccessor.HttpContext.Session.GetString("user");
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <aside>
+                <div class="nav-shopping">
+                    <h4>Shopping</h4>
+                    <hr style="width:80%;text-align:left;margin-left:0;border-style:dotted;">
+                    <ul>
+                        <li style="list-style-type: none;">
+                            <a asp-controller="Product">Products</a>
+                        </li>
+                        <hr style="width:75%;text-align:left;margin-left:0;border-style:dotted;">
+                        <li style="list-style-type: none;">
+                            <a asp-controller="Search">Search</a>
+                        </li>
+                        <hr style="width:75%;text-align:left;margin-left:0;border-style:dotted;">
+                    </ul>
+                </div>
+                @if (user != null) {
+                    <div class="nav-admin">
+                        @if(user == "admin@VM.com") {
+                        <h4>Administration</h4>
+                        <hr style="width:80%;text-align:left;margin-left:0;border-style:dotted;">
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <a asp-controller="Member">Members</a>
+                            </li>
+                            <hr style="width:75%;text-align:left;margin-left:0;border-style:dotted;">
+                        </ul>
+                        } else {
+                            <h4>Customer</h4>
+                            <hr style="width:80%;text-align:left;margin-left:0;border-style:dotted;">
+                            <ul>
+                                <li style="list-style-type: none;">
+                                    <a asp-controller="Order">Orders</a>
+                                </li>
+                                <hr style="width:75%;text-align:left;margin-left:0;border-style:dotted;">
+                            </ul>
+                        }
+                    </div>
+                }
+            </aside>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Weight</th>
+                    <th>Price</th>
+                    <th>Details</th>
+                </thead>
+                <tbody>
+                    @{ int indexID = 1; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@indexID</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Weight Ibs</td>
+                            <td>$@item.UnitPrice</td>
+                            <td>
+                                <a asp-controller="Product" asp-action="View" asp-route-Id="@item.ProductId" class="btn btn-outline-info">View</a>
+                                @if (user != null) {
+                                    @if (user == "admin@VM.com") {
+                                        <a asp-controller="Product" asp-action="Update" class="btn btn-outline-success" asp-route-Id="@item.ProductId">Update</a>
+                                        <a asp-controller="Product" asp-action="Delete" class="btn btn-outline-danger" asp-route-Id="@item.ProductId">Delete</a>
+                                    } else {
+                                        <a asp-controller="Order" asp-action="Create" class="btn btn-outline-warning" asp-route-name="@item.ProductName" asp-route-price="@item.UnitPrice">Order</a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        indexID++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+@model BusinessObject.Objects.Product
+@{
+    ViewData["Title"] = "View Details";
+}
+
+<h2>Product Details</h2>
+
+<dl>
+    <dt>@Model.ProductName</dt>
+    <dd>Category ID: @Model.CategoryId</dd>
+    <dd>Weight: @Model.Weight Ibs</dd>
+    <dd>Price: $@Model.UnitPrice</dd>
+    <dd>Stock: @Model.UnitslnStock</dd>
+    <dt>
+        <a asp-controller="Home" asp-action="Index" asp-route-Id="@Model.ProductId">Back to home</a>
+    </dt>
+</dl>
