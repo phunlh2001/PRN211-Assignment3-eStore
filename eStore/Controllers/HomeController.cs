@@ -1,19 +1,17 @@
-﻿
+﻿using DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
-using DataAccess.Repository.Products;
 
 namespace eStore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IProductRepository _db;
-        public HomeController()
-        {
-            this._db = new ProductRepository();
-        }
+        public HomeController(IProductRepository db) => _db = db;
+
+
         public IActionResult Index()
         {
-            var prods = this._db.GetList();
+            var prods = _db.GetList();
             return View(prods);
         }
 

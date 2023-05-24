@@ -1,6 +1,6 @@
 
 using BusinessObject.Objects;
-using DataAccess.Repository.Orders;
+using DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eStore.Controllers
@@ -8,13 +8,12 @@ namespace eStore.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderRepository _db;
-        public OrderController()
-        {
-            this._db = new OrderRepository();
-        }
+        public OrderController(IOrderRepository db) => _db = db;
+
+
         public IActionResult Index()
         {
-            var list = this._db.GetList();
+            var list = _db.GetList();
             return View(list);
         }
         public IActionResult Create(string name, int price)
@@ -29,7 +28,7 @@ namespace eStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                this._db.InsertOrder(order);
+                _db.InsertOrder(order);
                 return RedirectToAction("Index");
             }
             return View();
@@ -37,7 +36,7 @@ namespace eStore.Controllers
 
         public IActionResult CancelOrder(int id)
         {
-            this._db.DeleteOrder(id);
+            _db.DeleteOrder(id);
             return RedirectToAction("Index");
         }
     }

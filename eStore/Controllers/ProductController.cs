@@ -1,5 +1,5 @@
 using BusinessObject.Objects;
-using DataAccess.Repository.Products;
+using DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eStore.Controllers
@@ -7,10 +7,7 @@ namespace eStore.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _db;
-        public ProductController()
-        {
-            this._db = new ProductRepository();
-        }
+        public ProductController(IProductRepository db) => _db = db;
 
         public IActionResult Index() => View();
 
@@ -21,7 +18,7 @@ namespace eStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                this._db.InsertProduct(product);
+                _db.InsertProduct(product);
                 return Redirect("/");
             }
             return View();
@@ -29,7 +26,7 @@ namespace eStore.Controllers
 
         public IActionResult Delete(int id)
         {
-            var product = this._db.GetProduct(id);
+            var product = _db.GetProduct(id);
             return View(product);
         }
 
@@ -42,7 +39,7 @@ namespace eStore.Controllers
             }
             else
             {
-                this._db.DeleteProduct(id.Value);
+                _db.DeleteProduct(id.Value);
             }
             return Redirect("/");
         }
@@ -53,13 +50,13 @@ namespace eStore.Controllers
             {
                 return NotFound();
             }
-            var product = this._db.GetProduct(id.Value);
+            var product = _db.GetProduct(id.Value);
             return View(product);
         }
 
         public IActionResult Update(int id)
         {
-            var product = this._db.GetProduct(id);
+            var product = _db.GetProduct(id);
             return View(product);
         }
 
@@ -72,7 +69,7 @@ namespace eStore.Controllers
             }
             else
             {
-                this._db.UpdateProduct(prod);
+                _db.UpdateProduct(prod);
             }
             return Redirect("/");
         }

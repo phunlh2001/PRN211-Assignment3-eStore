@@ -1,21 +1,19 @@
-using System;
 using BusinessObject.Objects;
-using DataAccess.Repository.Members;
-using Microsoft.AspNetCore.Mvc;
+using DataAccess.Repository;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace eStore.Controllers
 {
     public class MemberController : Controller
     {
         private readonly IMemberRepository _db;
-        public MemberController(MemberRepository db)
-        {
-            this._db = db;
-        }
+        public MemberController(IMemberRepository db) => _db = db;
+
         public IActionResult Index()
         {
-            var list = this._db.GetList();
+            var list = _db.GetList();
             return View(list);
         }
 
@@ -26,14 +24,14 @@ namespace eStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var emailExist = this._db.CheckEmail(member.Email);
+                var emailExist = _db.CheckEmail(member.Email);
                 if (emailExist)
                 {
                     ViewBag.error = "Email does exits";
                 }
-                else if (String.Equals(cPwd, member.Password))
+                else if (Equals(cPwd, member.Password))
                 {
-                    this._db.InsertMember(member);
+                    _db.InsertMember(member);
                     return Redirect("/");
                 }
                 else
@@ -49,8 +47,8 @@ namespace eStore.Controllers
         [HttpPost]
         public IActionResult Login(string email, string pwd)
         {
-            var member = this._db.GetMemberByEmail(email);
-            var check = this._db.Login(email, pwd);
+            var member = _db.GetMemberByEmail(email);
+            var check = _db.Login(email, pwd);
             if (check)
             {
                 HttpContext.Session.SetString("user", email);
