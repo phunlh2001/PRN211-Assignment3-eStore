@@ -1,9 +1,8 @@
+using BusinessObject.Objects;
+using DataAccess.DaoAccess.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessObject.Objects;
-using DataAccess.DaoAccess.BaseDAO;
-using DataAccess.DaoAccess.Utils;
 
 namespace DataAccess.DaoAccess
 {
