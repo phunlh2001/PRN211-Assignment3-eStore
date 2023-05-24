@@ -1,4 +1,3 @@
-// using System.Data.Entity;
 using eStore.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,11 +5,8 @@ namespace eStore.DB
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-            // Database.EnsureDeleted();
-            Database.EnsureCreated();
-        }
+        public ApplicationDbContext() { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -25,6 +21,7 @@ namespace eStore.DB
                     o.ProductID,
                     o.OrderID
                 });
+
             modelBuilder.Entity<Member>().ToTable("Members");
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<Product>().ToTable("Products");
