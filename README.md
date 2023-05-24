@@ -1,3 +1,13 @@
-## Final project at class PRN211 - FU
+# PRN211 - Assignment 3 - 3 layers
 
-- Project use 3-layers model
+### BusinessObject
+- The project for define objects and migrations to Database
+
+### DataAccess
+- The project for building DAO and Repositories
+
+### eStore - MVC
+- The project for design client side, using:
+  + HTML5 (.cshtml)
+  + CSS3
+  + C# Controller rendering
