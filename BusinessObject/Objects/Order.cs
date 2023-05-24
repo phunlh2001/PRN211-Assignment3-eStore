@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BusinessObject.Objects
 {
-    public partial class Order
+    public class Order
     {
         public Order()
         {

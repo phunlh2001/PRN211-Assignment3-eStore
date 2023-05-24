@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable disable
 
-#nullable disable
 
 namespace BusinessObject.Objects
 {
-    public partial class OrderDetail
+    public class OrderDetail
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObject.Objects
 {
-    public partial class Product
+    public class Product
     {
         public Product()
         {

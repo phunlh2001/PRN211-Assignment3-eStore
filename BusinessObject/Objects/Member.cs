@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObject.Objects
 {
-    public partial class Member
+    public class Member
     {
         public Member()
         {
